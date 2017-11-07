@@ -1,0 +1,35 @@
+html, body {
+    font-family: sans-serif;
+    margin: 0;
+    color: #333;
+}
+
+#wrapper {
+
+}
+
+#canvas {
+    font-family: monospace;
+    font-size: 16px;
+    display: block;
+    margin: auto;
+}
+
+.view-title {
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 1px 1px 2px #333;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 1em 1em;
+}
+
+.sim-data {
+    font-family: monospace;
+    font-size: 14px;
+    color: #fff;
+    text-shadow: 1px 1px 2px #333;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 1em 1em;
+}
