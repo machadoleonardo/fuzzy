@@ -159,7 +159,7 @@ function updateText() {
     }
 
     // update sensors data
-    let data = "<p>ENVIRONMENT DATA:</p>";
+    let data = "<p>Dados do Ambiente:</p>";
     for (let k=0; k<sensors.length; k++) {
         let s = sensors[k];
         data += s.type + " sensor #" + sensors[k].id + ": " + Math.floor(sensors[k].distance) + "<br>";
