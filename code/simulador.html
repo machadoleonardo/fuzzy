@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
     <title>Simulador Robô utilizando Lógica Fuzzy</title>
@@ -15,7 +15,7 @@
 <body>
 
     <div id="wrapper">
-        <h1>Simulador Robô utilizando Lógica Fuzzy</h1>
+        <h1>Robô lógica Fuzzy</h1>
     	<div id="canvas"></div>
     </div>
 
@@ -40,10 +40,44 @@
 <script src="js/fuzzy.js"></script>
 <script>
     // START:
-    $.getJSON('js/views.json', function(response){
-        views = response;
+        views = [ {
+	"name": "Visão superior",
+	"attach": false,
+	"boundaries": {
+		"left": 0,
+		"bottom": 0,
+		"width": 1,
+		"height": 1
+	},
+	"background": 11698047,
+	"position": {
+		"x": 1,
+		"y": 100,
+		"z": 0
+	},
+	"projection": "ortho",
+	"frustrum": {
+		"w": 510,
+		"h": 510
+	},
+	"zoom": 5,
+	"camera": {
+		"object": {
+			"uuid": "6C9C0B1A-23E7-4B44-8F4F-E4BA2796BEFF",
+			"type": "OrthographicCamera",
+			"matrix": [-2.220446049250313e-16, -1.1102230246251565e-16, -1, 0, -0.9999500037496877, 0.009999500037496611, 1.1102230246251565e-16, 0, 0.009999500037496722, 0.9999500037496877, -2.220446049250313e-16, 0, 1, 100, 0, 1],
+			"zoom": 5,
+			"left": -510,
+			"right": 510,
+			"top": 510,
+			"bottom": -510,
+			"near": 0,
+			"far": 10000
+		}
+	}
+}];
         window.onload = init;
-    });
+   
 </script>
 
 </html>

@@ -1,4 +1,3 @@
-
 function update() {
 
     clock++;
@@ -22,24 +21,24 @@ function updateSensors () {
 
     if (projectionsIndex === undefined) { projectionsIndex = 0; }
     if (!sensors) {
-        console.log("Call createSensors() first");
+        console.log("Criando sensores createSensors() first");
         return;
     }
 
     let botRotation = new THREE.Matrix4().extractRotation( body.matrix );
-    // apply bot's rotation to sensors
+    //aplique a rotação do bot aos sensores
     for (let k = 0; k < sensors.length; k++){
 
-        // apply bot's rotation to sensor directions
+        // aplicar a rotação do bot para as instruções do sensor
         let direction = sensors[k].direction.clone();
         direction.applyMatrix4( botRotation );
         raycaster.set( body.position, direction );
 
-        // get intersections
+        // obter interseções
         let intersections = raycaster.intersectObjects( collidableMeshList );
         let intersection = ( intersections.length ) > 0 ? intersections[ 0 ] : null;
 
-        // update sensor projections
+        // atualizar as projeções dos sensores
         if ( intersection ) {
             sensors[k].distance = intersection.distance * 1.5;
 
@@ -49,7 +48,7 @@ function updateSensors () {
         }
     }
 
-    // draw projections
+    // Definir projeções
     for ( var i = 0; i < projections.length; i++ ) {
         var projection = projections[ i ];
         projection.scale.multiplyScalar( 0.98 );
@@ -84,9 +83,8 @@ function updateControl () {
             vehicle.applyEngineForce( -effective_turning, 1 );
         }
 
-        // for steerable wheels:
-        //vehicle.setSteering( input.steering, 0 );
-        //vehicle.setSteering( input.steering, 1 );
+         vehicle.setSteering( input.steering, 0 );
+         vehicle.setSteering( input.steering, 1 );
 
         if ( input.power === true ) {
             vehicle.setBrake( 0 );
@@ -117,13 +115,11 @@ function updateText() {
     let canvas_height   = canvas.height();
     let canvas_width    = canvas.width();
 
-    // remove all titles if any (used for window size changes)
     let view_title      = $("." + VIEW_CLASS);
     let sensor_data     = $("." + SENSORS_CLASS);
 
     if (view_title.length == 0) {
 
-        // create view titles
         for (let ii = 0; ii < views.length; ++ii ) {
             let view = views[ii];
             view_title = $('<div></div>');
@@ -137,7 +133,6 @@ function updateText() {
         }
     }
 
-    // update view titles
     if (clock%60 == 0) {
         for (let ii = 0; ii < views.length; ++ii ) {
             let view = views[ii];
@@ -172,7 +167,7 @@ function updateText() {
         case 15: arrow = "-&gt"; break;
         case 30: arrow = "--&gt"; break;
     }
-    data += "<br>Fuzzy output: " + fuzzyDir + " " + arrow;
+    data += "<br>Saída Fuzzy: " + fuzzyDir + " " + arrow;
     sensor_data.each(function(){$(this).html(data);});
 
 }

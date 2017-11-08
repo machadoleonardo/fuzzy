@@ -2,10 +2,10 @@
 
 Physijs.scripts.worker = 'js/physijs/physijs_worker.js'
 
-let windowWidth, windowHeight, mouseX, mouseY;                  // window
-let renderer, scene, stats, camera, views;                      // scene
-let collidableMeshList, projections, projectionsIndex, body;    // physics
-let clock, input, sensors, vehicle, raycaster, fuzzyDir;        // control
+let windowWidth, windowHeight, mouseX, mouseY;                  // Janela
+let renderer, scene, stats, camera, views;                      // cena
+let collidableMeshList, projections, projectionsIndex, body;    // física
+let clock, input, sensors, vehicle, raycaster, fuzzyDir;        // Controle
 
 //==============================================================================
 
@@ -13,15 +13,15 @@ function init() {
 
     stats = new Stats();
 
-    setRenderer();              // canvas renderer, antialias, canvas dimensions
-    setScene();                 // scene, gravity, init vars
-    setLights();                // sun, ambient light
-    setCameras();               // set cameras from views.json
-
-    createGround();             // solid ground with height and texture
-    createObstacles();          // random solid boxes and map boundaries
-    createBot();                // drivable bot
-    createSensors();            // sensors and visualization
+    setRenderer();              
+    setScene();            
+    setLights();           
+    setCameras();          
+                           
+    createGround();        
+    createObstacles();     
+    createBot();           
+    createSensors();       
 
     let container = document.getElementById( 'canvas' )
     container.appendChild( renderer.domElement );

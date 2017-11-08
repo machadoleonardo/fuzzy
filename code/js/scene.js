@@ -92,8 +92,8 @@ function createGround() {
 
     let ground_material = Physijs.createMaterial(
         new THREE.MeshLambertMaterial({ map: loader.load( 'scene/pattern.png' ) }),
-        1,  // high friction
-        0.4 // low restitution
+        1,  // alta fricção
+        0.4 // baixa restituição
     );
     ground_material.map.wrapS = ground_material.map.wrapT = THREE.RepeatWrapping;
     ground_material.map.repeat.set( 15, 15 );
@@ -124,7 +124,7 @@ function createGround() {
 
 function createObstacles() {
 
-    const NUM_BOXES = 0;
+    const NUM_BOXES = 15;
 
     let wall_geometry, wall, boxHeight = 5, boxWidth = 4;
     let wall_material = new THREE.MeshStandardMaterial({
@@ -135,24 +135,24 @@ function createObstacles() {
         metalness: 0.5
     });
 
-    // create random walls
+    // criar paredes aleatórias
     for(let ii = 0; ii<NUM_BOXES; ii++){
         let boxLength = randInt(15, 45);
         build(boxLength, randInt(-90,90), randInt(-90,90), Math.random() >= 0.5)
     }
 
-    // create map boundaries
+    // criar limites de mapas
     build(200, 0, -100);
     build(200, 0, 100);
     build(200, -100, 0, true);
     build(200, 100, 0, true);
 
-    // generate random integer between min and max
+    // gerar inteiro aleatório entre min e max
     function randInt(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
-    // build a box given its length and location
+    // construir um obstaculo dada a sua extensão e localização
     function build(boxLength, posX, posZ, rotate=false) {
         wall_geometry = new THREE.BoxGeometry(boxLength, boxHeight, boxWidth);
         wall = new Physijs.BoxMesh( wall_geometry, wall_material, 0 );
@@ -174,20 +174,19 @@ function createBot() {
 
     let bot_material = Physijs.createMaterial(
         new THREE.MeshLambertMaterial({ color: 0xff6666 }),
-        4.0,    // friction
-        1.0     // restitution
+        4.0,    // atrito
+        1.0     // restituição
     );
 
     let wheel_material = Physijs.createMaterial(
         new THREE.MeshLambertMaterial({ wireframe: true,
         wireframeLinewidth: 3, color: 0x444444 }),
-        2.0,    // friction
-        0.1     // restitution
+        2.0,    // atrito
+        0.1     // restituição
     );
     let scaleFactor = 1.4;
     let wheel_geometry = new THREE.SphereGeometry( 1.0, 16, 16);
 
-    // load bot model from json:
     let json_loader = new THREE.ObjectLoader();
     json_loader.load( "models/bot.json", function( bot, bot_materials ){
 
@@ -216,7 +215,6 @@ function createBot() {
             6000
         ));
 
-        // attach cameras to bot
         for (let ii = 0; ii < views.length; ii++){
             if (views[ii].attach) {
                 body.add(views[ii].camera);
@@ -225,7 +223,7 @@ function createBot() {
 
         scene.add( vehicle );
 
-        // add wheels
+        // adicionar rodas
         let dWheel = 2;
         for ( var i = 0; i < 4; i++ ) {
             vehicle.addWheel(wheel_geometry,
@@ -252,7 +250,7 @@ function createBot() {
         document.addEventListener('keydown', function(ev) { bot_keydown(ev); } );
         document.addEventListener('keyup',   function(ev) {   bot_keyup(ev); } );
 
-        autoDrive();        // autonomous drive
+        autoDrive();        
     });
 }
 
@@ -267,9 +265,9 @@ function createSensors(visible = true) {
 
     sensors = [];
     let sensorsDir = []
-    sensorsDir.push( new THREE.Vector3( 1, 0, 1 ).normalize() );    // 45deg left
-    sensorsDir.push( new THREE.Vector3( 0, 0, 1 ).normalize() );    // ahead
-    sensorsDir.push( new THREE.Vector3( -1, 0, 1 ).normalize() );   // 45deg right
+    sensorsDir.push( new THREE.Vector3( 1, 0, 1 ).normalize() );    // 45deg esquerda
+    sensorsDir.push( new THREE.Vector3( 0, 0, 1 ).normalize() );    // adiante
+    sensorsDir.push( new THREE.Vector3( -1, 0, 1 ).normalize() );   // 45deg direita
 
     for (let k=0; k<sensorsDir.length; k++) {
         sensors[k] = {
